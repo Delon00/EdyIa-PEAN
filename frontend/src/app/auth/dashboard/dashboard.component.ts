@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../../services/backend.service';
+import { BackendService } from '../../../services/backend.service';
 import { CommonModule } from '@angular/common';
-import { User } from '../../interfaces/user';
+import { User } from '../../../interfaces/user';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 
 @Component({
