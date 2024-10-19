@@ -1,0 +1,8 @@
+/backend/node_modules
+/frontend/node_modules
+/backend/prisma/migrations
+/backend/.env
+/backend/package-lock.json
+/frontend/package-lock.json
+/frontend/.env
+/frontend/.env.local

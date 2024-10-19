@@ -1,0 +1,53 @@
+<main *ngIf="user">
+    <section class="left">
+        <nav>
+            <a routerLink="/dashboard"><img src="logo.png" alt=""></a>
+            <div class="flex gap-3 items-center">
+                <a routerLink="/dashboard">Apercu</a>
+                <a routerLink="/dashboard">Dashboard</a>
+                <div class="search-container">
+                    <input type="text"  placeholder="Search" />
+                    <i class="pi pi-search"></i>
+                </div>
+            </div>
+        </nav>
+        <div class="flex flex-col gap-3">
+            <h2>Bienvenue, {{ user.prenom }}!</h2>
+            <div class="flex gap-3">
+                <button class="btn-apercu current">Mes stats</button>
+                <button class="btn-apercu">Mes cours</button>
+                <button class="btn-apercu">Quizz</button>
+            </div>
+            <div class="onglet-container">
+                <div class="grid grid-cols-5 grid-rows-5 gap-4">
+                    <div class="col-span-2 row-span-2 card-onglet bg-[#ffc]">1</div>
+                    <div class="col-span-2 row-span-5 col-start-3 card-onglet">2</div>
+                    <div class="row-span-3 col-start-5 card-onglet">3</div>
+                    <div class="col-span-2 row-span-3 row-start-3 card-onglet">4</div>
+                    <div class="row-span-2 col-start-5 row-start-4 card-onglet">5</div>
+                </div>                
+            </div>
+        </div>
+    </section>
+    <section class="right">
+        <nav>
+            <div class="flex gap-5 items-center">
+                <button><i class="pi pi-inbox" title="Messages"></i></button>
+                <button><i class="pi pi-bell" title="Notifications" ></i></button>
+            </div>
+            <button (click)="menuProfile()"><img src="img/profile.png" alt="logo" title="profile"></button>
+            <div *ngIf="isProfileMenuOpen" class="profile-menu">
+                <div class="flex justify-between">
+                    <p>Menu</p>
+                    <button class="close" (click)="menuProfile()" title="Fermer"></button>
+                </div>
+                <hr>
+                <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-user"></i> Profile</a>
+                <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Paramètres</a>
+                <hr>
+                <button class="flex gap-3 items-center cursor-pointer my-2 hover:text-red-500" (click)="logout()"> <i class="pi pi-sign-out"></i> Déconnexion</button>
+            </div>
+        </nav>
+        <hr class="mx-4 border-black">
+    </section>
+</main>

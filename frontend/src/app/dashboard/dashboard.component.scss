@@ -1,0 +1,84 @@
+main {
+    display: flex;
+    height: 100vh;
+
+    .left {
+        width: 100%;
+        padding: 0 1rem;
+        nav {
+            display: flex;
+            padding: 0.5rem;
+            justify-content: space-between;
+            img {
+                width: auto;
+                height: 60px;
+            }
+            .search-container {
+                border-radius: 17px;
+                border: 1px solid #e0e0e0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding:0.1rem 0.5rem;
+
+                input:focus {
+                    outline: none;                    
+                }
+            }
+        }
+
+        .card-onglet {
+            border-radius: 17px;
+            padding: 1rem;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+    }
+
+    .right {
+        background: rgb(255,241,206);
+        background: linear-gradient(135deg, rgba(255,241,206,1) 0%, rgba(242,255,241,1) 100%);
+        width: 40%;
+        nav {
+            display: flex;
+            padding: 0.5rem 1rem;
+            justify-content: space-between;
+            img {
+                width: auto;
+                height: 40px;
+            }
+            .icon-container {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding:0.1rem 0.5rem;
+
+                input:focus {
+                    outline: none;                    
+                }
+            }
+            .profile-menu {
+                position: absolute;
+                width: 300px;
+                top: 50px;
+                right: 10px;
+                background-color: white;
+                border: 1px solid #e0e0e0;
+                padding: 0.5rem;
+                border-radius: 15px;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+        }
+    }
+    .btn-apercu{
+        border-radius: 17px;
+        border: 1px solid #e0e0e0;
+        padding: 0 1rem;
+        background-color: #fff;
+    }
+    .current{
+        background-color: #ffc244;
+    }
+}

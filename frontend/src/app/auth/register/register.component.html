@@ -1,0 +1,41 @@
+<main>
+  <section class="left">
+    <div class="section-content">
+      <h1>Bienvenue sur <span>EdyIa</span></h1>
+      <p>Explorez une nouvelle méthode révolutionnaire pour apprendre vos cours de manière plus efficace et interactive ! Faites de chaque leçon une expérience captivante, adaptée à votre rythme.</p>
+    </div>
+  </section>
+  <section class="right">
+    <a routerLink="/"><img class="logo" src="logo.png"  alt="EdyIa"></a>
+    <form [formGroup]="formRegister" (ngSubmit)="onRegister()">
+      <p class="message-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <div class="flex flex-col w-full">
+      <label for="nom">Nom</label>
+      <input id="nom" type="text" pInputText formControlName="nom" />
+    </div>
+    <div class="flex flex-col w-full my-2">
+      <label for="prenom">Prénom</label>
+      <input id="prenom" type="text" pInputText formControlName="prenom" />
+    </div>
+    <div class="flex flex-col w-full my-2">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText formControlName="email" />
+    </div>
+    <p class="message-error" *ngIf="emailError">{{ emailError }}</p>
+    <div class="flex flex-col w-full my-2">
+      <label for="password">Mot de passe</label>
+      <input id="password" type="password" pInputText formControlName="password" />
+    </div>
+    <p class="message-error" *ngIf="passwordError">{{ passwordError }}</p>
+
+    <div class="flex justify-between my-2">
+      <a class="font-semibold text-xs cursor-pointer" routerLink="/forgot-password">Mot de passe oublié ?</a>
+    </div>
+    <button class="btn-link w-full" type="submit" [disabled]="formRegister.invalid || isLoading">
+      <ng-container *ngIf="!isLoading">S'inscrire</ng-container>
+      <ng-container *ngIf="isLoading"><i class="pi pi-spin pi-spinner"></i></ng-container>
+    </button>
+  </form>
+  <p class="text-center">Déjà un compte ? <a class="font-semibold" routerLink="/login">Se connecter</a></p>
+  </section>
+</main>

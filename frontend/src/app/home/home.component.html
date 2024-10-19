@@ -1,0 +1,48 @@
+<main>
+  <div class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <div class="nav-bar">
+        <button *ngIf="!LoginForm" (click)="showLoginForm()" class="btn-link">Se connecter</button>
+        <button *ngIf="LoginForm" (click)="hideLoginForm()" class="btn-link"><i class="pi pi-times"></i></button>
+        <div class="loginForm" *ngIf="LoginForm">
+          <h2>Connexion</h2>
+          <form [formGroup]="formLogin" (ngSubmit)="onLogin()">
+            <p class="message-error" *ngIf="errorMessage">{{ errorMessage }}</p>
+            <div class="flex flex-col w-full">
+              <label for="email">Email</label>
+              <input id="email" type="email" pInputText formControlName="email" />
+            </div>
+            <p class="message-error" *ngIf="emailError">{{ emailError }}</p>
+            <div class="flex flex-col w-full">
+              <label for="password">Mot de passe</label>
+              <input id="password" type="password" pInputText formControlName="password" />
+            </div>
+            <p class="message-error" *ngIf="passwordError">{{ passwordError }}</p>
+
+            <div class="flex justify-between">
+              <a class="font-semibold text-xs cursor-pointer" routerLink="/register" >Mot de passe oublié ?</a>
+            </div>
+            <button class="btn-link" type="submit" [disabled]="formLogin.invalid || isLoading">
+              <ng-container *ngIf="!isLoading">Connexion</ng-container>
+              <ng-container *ngIf="isLoading"><i class="pi pi-spin pi-spinner"></i></ng-container>
+            </button>
+            <p class="text-center">Pas de compte ? <a class="font-semibold cursor-pointer" routerLink="/register">S'inscrire</a></p>
+          </form>
+        </div>
+      </div>
+      <div class="title">
+        <h1>Edy <span>Ia</span></h1>
+        <p>Etudier vos cours grace a l'IA</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="container">
+      <div class="flex flex-col justify-center items-center">
+        <h2>Edy <span>Ia</span></h2>
+        <p>Etudier vos cours grace a l'IA</p>
+      </div>
+    </div>
+  </section>
+</main>

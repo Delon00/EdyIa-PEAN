@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1 {font-size: 2em;font-weight: bold;margin: 20px 0;}
+h2 {font-size: 1.75em;font-weight: bold;margin: 18px 0;}
+h3 {font-size: 1.5em;font-weight: bold;margin: 16px 0;}
+h4 {font-size: 1.25em;font-weight: bold;margin: 14px 0;}
+h5 {font-size: 1em;font-weight: bold;margin: 12px 0;}
+h6 {font-size: 0.875em;font-weight: bold;margin: 10px 0;}
+h7 {font-size: 0.75em;font-weight: bold;margin: 8px 0;}
+
+.logo{
+    height: 60px;
+    width: auto;
+}
+.btn-link{
+    background-color: #ffc244;
+    color: #fff;
+    padding: 5px 20px;
+    border-radius: 17px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: all 0.3s ease-in-out;
+}
+.message-error{
+    color: red;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+    max-width: 100%;
+}
+.close{
+    
+    background-color: red;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    border: none;
+    cursor: pointer;
+}
