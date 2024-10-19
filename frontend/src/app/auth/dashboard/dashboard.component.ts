@@ -14,6 +14,7 @@ import { Router, RouterModule, RouterLink } from '@angular/router';
 export class DashboardComponent implements OnInit {
   isProfileMenuOpen: boolean = false;
   isProfileMenuOpenResponsive: boolean = false;
+  isMenuModuleOpen: boolean = false;
   user: any = null;
 
   constructor(private backendService: BackendService, private router: Router) {}
@@ -37,6 +38,10 @@ export class DashboardComponent implements OnInit {
 
   menuProfile() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen;
+  }
+
+  menuModule() {
+    this.isMenuModuleOpen = !this.isMenuModuleOpen;
   }
 
   menuProfileResponsive() {

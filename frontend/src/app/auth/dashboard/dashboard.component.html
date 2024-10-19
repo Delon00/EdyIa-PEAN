@@ -2,7 +2,7 @@
     <section class="left">
         <nav>
             <div class="flex items-center gap-2">
-                <button (click)="logout()" class="btn-link flex justify-center" title="Commencer"><i class="pi pi-plus"></i></button>
+                <button (click)="menuModule()" class="btn-link flex justify-center" title="Commencer"><i class="pi pi-plus"></i></button>
                 <span class="token">{{ user.jetons.length > 0 ? user.jetons[0].amount : 0 }} <img src="img/coin.png" alt=""></span>
             </div>
             <div class="flex gap-3 items-center search-div">
@@ -12,10 +12,10 @@
                     <i class="pi pi-search"></i>
                 </div>
             </div>
-            <button (click)="menuProfileResponsive()"><img src="img/profile.png" alt="logo" title="profile"></button>
+            <button (click)="menuProfileResponsive() " class="profile-btn-resp"><img src="img/profile.png" alt="logo" title="profile"></button>
         </nav>
         <div class="flex flex-col gap-3">
-            <h3>Bienvenue, <span class="text-name-user">{{ user.prenom }}!</span></h3>
+            <h3>Salut, <span class="text-name-user">{{ user.prenom }}!</span></h3>
             <div class="flex gap-3">
                 <button class="btn-apercu current">Mes stats</button>
                 <button class="btn-apercu">Mes cours</button>
@@ -28,7 +28,7 @@
                         <h5>Inscription incomplete</h5>
                         <p>Complétez votre inscription pour accéder à toutes les fonctionnalités du site.</p>
                         <div class="flex justify-end mt-3">
-                            <a routerLink="/dashboard/profile" class="btn-link">Compléter</a>
+                            <a routerLink="/final-register" class="btn-link text-sm">Compléter</a>
                         </div>
                     </div>
 
@@ -105,5 +105,39 @@
             </div>
         </nav>
         <hr class="mx-4 border-black">
+        
     </section>
+
+    <div *ngIf="isMenuModuleOpen" class="menu-module-container">
+        <div class="menu-module">
+            <div class="flex justify-between items-center w-full mb-1"><h5 class="m-0">Modules</h5><button class="close" (click)="menuModule()" title="Fermer"></button></div>
+            <hr>
+            <div class="module-card-container">
+                <div class="module-card c1">
+                    <h6>Pdf Scan</h6>
+                    <div class="flex justify-between items-center px-3">
+                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                        <img src="img/pdf.png" alt=""></div>
+                </div>
+                <div class="module-card c2">
+                    <h6>Cours expliq</h6>
+                    <div class="flex justify-between items-center px-3">
+                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                        <img src="img/cours.png" alt=""></div>
+                </div>
+                <div class="module-card c3">
+                    <h6>Quizz</h6>
+                    <div class="flex justify-between items-center px-3">
+                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                        <img src="img/quizz.png" alt=""></div>
+                </div>
+                <div class="module-card c4">
+                    <h6>Pdf Scan</h6>
+                    <div class="flex justify-between items-center px-3">
+                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                        <img src="img/pdf.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
