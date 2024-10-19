@@ -49,14 +49,20 @@ export class HomeComponent implements OnInit {
       this.service.login(this.userlogin).subscribe(
         (response: any) => {
           this.service.saveUserData(response.token, response.user);
-          console.log(response.user);
-          console.log(response.token);
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         },
         (error: any) => {
-          this.errorMessage = "Échec de la connexion. Veuillez vérifier vos informations.";
-          console.error('Erreur de connexion', error);
+          if (error.status === 400) {
+            this.errorMessage = error.message;
+          } else if (error.status === 401) {
+            this.errorMessage = error.message;
+          } else if (error.status === 500) {
+            this.errorMessage = "Erreur serveur, veuillez réessayer plus tard.";
+          } else {
+            this.errorMessage = "Échec de la connexion. Veuillez vérifier vos informations.";
+            console.log('Erreur inattendue:', error);
+          }
           this.isLoading = false;
         }
       );

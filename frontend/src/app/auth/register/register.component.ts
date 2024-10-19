@@ -53,17 +53,21 @@ export class RegisterComponent implements OnInit {
       this.userregister = this.formRegister.value;
       this.service.register(this.userregister).subscribe(
         (response: any) => {
-          if (response && typeof response === 'object' && response.message) {
-            console.log('Inscription réussie', response);
+          if (response && response.message === 'Utilisateur créé avec succès') {
+            this.service.saveUserData(response.token, response.user);
             this.router.navigate(['/dashboard']);
           } else {
             console.error('Réponse inattendue', response);
-            this.errorMessage = "Réponse inattendue du serveur.";
+            this.errorMessage = response.message || "Réponse inattendue du serveur.";
           }
           this.isLoading = false;
         },
         (error: any) => {
-          this.errorMessage = "Échec de l'inscription. Veuillez vérifier vos informations.";
+          if (error.status === 400) {
+            this.errorMessage = error.error.message || "Échec de l'inscription. Veuillez vérifier vos informations.";
+          } else {
+            this.errorMessage = "Erreur serveur. Veuillez réessayer plus tard.";
+          }
           console.error('Erreur d\'inscription', error);
           this.isLoading = false;
         }

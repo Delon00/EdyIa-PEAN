@@ -11,6 +11,7 @@ export interface User {
     telephone?: string;
     password?: string;
     role?: string;
+    subscription_expired_at?: Date;
     jetons?: any[];
     courses?: any[];
     accessLogs?: any[];

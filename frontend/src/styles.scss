@@ -35,9 +35,23 @@ h7 {font-size: 0.75em;font-weight: bold;margin: 8px 0;}
     text-decoration: none;
     font-weight: bold;
     border: none;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    animation: btn-link 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
+.btn-link:hover{
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+@keyframes btn-link{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
 .message-error{
     color: red;
     font-size: 14px;

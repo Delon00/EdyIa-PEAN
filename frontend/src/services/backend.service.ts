@@ -5,24 +5,27 @@ import { catchError, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { Register } from '../interfaces/register';
 import { Router } from '@angular/router';
+import { decodeJwt } from './decodeJwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
   private authUrl = 'http://localhost:8080/auth';
-
+  private userUrl = 'http://localhost:8080/user';
   constructor(private http: HttpClient, private router: Router) {}
 
   private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Something went wrong; please try again later.';
     if (error.error instanceof ErrorEvent) {
-      // Client-side error
+
       console.error('An error occurred:', error.error.message);
     } else {
-      // Backend error
+
       console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
+      errorMessage = error.error.message || errorMessage;
     }
-    return throwError(() => new Error('Something went wrong; please try again later.'));
+    return throwError(() => ({ status: error.status, message: errorMessage }));
   }
 
   register(user: Register): Observable<any> {
@@ -48,6 +51,27 @@ export class BackendService {
     this.router.navigate(['/']);
   }
 
+  getUser(): Observable<any> {
+    const userId = this.getUserId();
+    return this.http.get<any>(`${this.userUrl}/getUser/${userId}`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${this.getToken()}` })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const decoded: any = decodeJwt(token);
+      return decoded.userId;
+    } catch (error) {
+      console.error('Erreur lors du décodage du token:', error);
+      return null; 
+    }
+  }
+
   saveUserData(token: string, user: User): void {
     if (typeof window !== 'undefined') {
       localStorage.setItem('token', token);
@@ -60,6 +84,8 @@ export class BackendService {
       localStorage.setItem('token', token);
     }
   }
+
+
 
   getToken(): string | null {
     if (typeof window !== 'undefined') {

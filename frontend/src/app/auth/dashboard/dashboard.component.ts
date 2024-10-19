@@ -13,26 +13,38 @@ import { Router, RouterModule, RouterLink } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   isProfileMenuOpen: boolean = false;
-  user: User | null = null;
+  isProfileMenuOpenResponsive: boolean = false;
+  user: any = null;
 
   constructor(private backendService: BackendService, private router: Router) {}
 
   ngOnInit(): void {
-    const userData = this.backendService.getUserData();
-    if (userData) {
-      this.user = userData;
-    } else {
-      console.error("Aucun utilisateur trouvé dans le stockage local");
-    }
+    this.backendService.getUser().subscribe({
+      next: (data) => {
+        if (data && data.user) {
+          this.user = data.user;
+          console.log('Utilisateur récupéré:', this.user);
+        } else {
+          console.error("Aucune donnée d'utilisateur reçue.");
+        }
+      },
+      error: (err) => {
+        console.error("Erreur lors de la récupération de l'utilisateur:", err);
+      }
+    });
   }
+
 
   menuProfile() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen;
+  }
+
+  menuProfileResponsive() {
+    this.isProfileMenuOpenResponsive = !this.isProfileMenuOpenResponsive;
   }
 
   logout() {
     this.backendService.logout();
     this.router.navigate(['/']);
   }
-  
 }

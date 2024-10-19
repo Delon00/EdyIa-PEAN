@@ -7,8 +7,25 @@ main {
         padding: 0 1rem;
         nav {
             display: flex;
-            padding: 0.5rem;
+            padding: 0.5rem 0;
             justify-content: space-between;
+
+            .token{
+                border-radius: 17px;
+                background-color: #000;
+                border: 1px solid #e0e0e0;
+                font-size: 14px;
+                padding: 0.2rem 0.5rem;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
             img {
                 width: auto;
                 height: 60px;
@@ -30,9 +47,69 @@ main {
 
         .card-onglet {
             border-radius: 17px;
-            padding: 1rem;
+            padding: 0.5rem;
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         }
+        .progres{
+            background-color: rgb(0, 0, 0);
+            padding: 0.2rem 0.5rem;
+            border-radius: 17px;
+            display: flex ;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .text-name-user{
+            background: #383B1C;
+            background: linear-gradient(to right, #383B1C 0%, #FFC224 59%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+
+        }
+        .modules-container{
+            display: flex;
+            gap: 1rem;
+
+            .module-card{
+                width: 100%;
+                border-radius: 17px;
+                padding:0.2rem 0.5rem;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+                h6{
+                    font-size: 16px;
+                    background: #fff345;
+                    background: linear-gradient(to right, #fff345 0%, #FFC224 64%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 17px;
+                }
+
+                img{
+                    width: 4.5rem;
+                }
+
+                a{
+                    background-color: #000;
+                    border-radius: 100%;
+                    padding: 0 0.5rem;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    color: #ffc224;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    i{
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+        }
+
     }
 
     .right {
@@ -82,3 +159,22 @@ main {
         background-color: #ffc244;
     }
 }
+
+
+@media screen and (max-width: 768px) {
+    .right{display: none;}
+
+
+}
+
+@media screen and (max-width: 630px) {
+    main .left .modules-container{  display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);}
+}
+
+@media screen and (max-width: 530px) {
+    .search-div{display: none;}
+}
+
+@media screen and (max-width: 480px) {}

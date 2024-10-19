@@ -25,6 +25,7 @@ model User {
   password           String?
   role               Role      @default(FREEMIUM)
   jetons             Jeton[]   
+  subscription_expired_at DateTime?
   courses            Course[] 
   accessLogs         AccessLog[]
   created_at         DateTime  @default(now())
@@ -70,6 +71,8 @@ model Transaction {
 enum TransactionType {
   RECHARGE
   SUBSCRIPTION
+  SUBSCRIPTION_PAY
+  SUBSCRIPTION_CANCEL
 }
 
 model Course {
