@@ -6,3 +6,4 @@
 /frontend/package-lock.json
 /frontend/.env
 /frontend/.env.local
+/node_modules
