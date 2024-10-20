@@ -1,8 +1,7 @@
-// backend/routes/userRoutes.js
-const express = require('express');
-const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
+import express from 'express';
+import { PrismaClient } from '@prisma/client';
 
+const router = express.Router();
 const prisma = new PrismaClient();
 
 router.get('/getUser/:id', async (req, res) => {
@@ -33,4 +32,4 @@ router.get('/getUser/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

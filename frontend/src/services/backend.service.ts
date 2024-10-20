@@ -14,7 +14,7 @@ import { decodeJwt } from './decodeJwt';
 export class BackendService {
   private authUrl = 'http://localhost:8080/auth';
   private userUrl = 'http://localhost:8080/user';
-  private askUrl = 'http://localhost:8080/ask/';
+  private askUrl = 'http://localhost:8080/ask';
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -22,12 +22,10 @@ export class BackendService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Something went wrong; please try again later.';
     if (error.error instanceof ErrorEvent) {
-
-      console.error('An error occurred:', error.error.message);
+        console.error('An error occurred:', error.error.message);
     } else {
-
-      console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
-      errorMessage = error.error.message || errorMessage;
+        console.error(`Le backend a retourné le code ${error.status}, le corps était:`, error.error);
+        errorMessage = error.error.message || errorMessage;
     }
     return throwError(() => ({ status: error.status, message: errorMessage }));
   }
@@ -37,11 +35,15 @@ export class BackendService {
   }
 
   generateQuiz(topic: string, numberOfQuestions: number): Observable<any> {
-    return this.http.post<any>(`${this.askUrl}/generate-quiz`, { topic, numberOfQuestions })
-        .pipe(
-            catchError(this.handleError)
-        );
-}
+    return this.http.post<any>(`${this.askUrl}/quiz`, { topic, numberOfQuestions })
+    .pipe(catchError(this.handleError));
+  }
+
+  generateExpliq(context: string, question: string): Observable<any> {
+    return this.http.post<any>(`${this.askUrl}/expliq`, { context, question })
+    .pipe(catchError(this.handleError));
+  }
+  
 
   
 

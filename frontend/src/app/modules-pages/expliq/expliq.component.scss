@@ -1,0 +1,39 @@
+nav {
+    display: flex;
+    padding: 1rem 0;
+    justify-content: space-between;
+
+    .token{
+        border-radius: 17px;
+        background-color: #000;
+        border: 1px solid #e0e0e0;
+        font-size: 14px;
+        padding: 0.2rem 0.5rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+    img {
+        width: auto;
+        height: 40px;
+    }
+    .search-container {
+        border-radius: 17px;
+        border: 1px solid #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding:0.1rem 0.5rem;
+
+        input:focus {
+            outline: none;                    
+        }
+    }
+}

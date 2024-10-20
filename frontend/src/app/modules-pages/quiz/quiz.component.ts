@@ -1,3 +1,4 @@
+//frontend/src/app/modules-pages/quiz/quiz.component.ts
 import { Component } from '@angular/core';
 import { BackendService } from '../../../services/backend.service';
 import { CommonModule } from '@angular/common';
@@ -23,8 +24,10 @@ export class QuizComponent {
 
   onSubmit() {
     const { topic, numberOfQuestions } = this.formQuiz.value;
+    console.log('Données du formulaire:', { topic, numberOfQuestions });
     this.backendService.generateQuiz(topic, numberOfQuestions).subscribe(
       response => {
+        console.log('Réponse du serveur:', response); 
         this.quiz = response.quiz;
       },
       error => {

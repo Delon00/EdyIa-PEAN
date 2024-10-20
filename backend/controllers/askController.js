@@ -1,46 +1,155 @@
-const OpenAI = require('openai');
-const { validationResult } = require('express-validator');
+import fetch from 'node-fetch';
+import { validationResult } from 'express-validator';
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+const askController = {
+    quiz: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log('Erreurs de validation:', errors.array());
+            return res.status(400).json({ errors: errors.array() });
+        }
+    
+        const { topic, numberOfQuestions } = req.body;
+        console.log('Données reçues:', { topic, numberOfQuestions });
+        const API_URL = 'https://api-inference.huggingface.co/models/deepset/roberta-base-squad2'; 
+        const API_TOKEN = process.env.HUGGING_FACE_API_KEY;
+    
+        if (!API_TOKEN) {
+            return res.status(500).json({ error: 'API token Hugging Face non défini.' });
+        }
+    
+        try {
+            // Étape 1: Générer le contexte
+            const contextResponse = await fetch(API_URL, {
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({ inputs: `Peux-tu générer un contexte sur le sujet: ${topic}?` }),  
+            });
+    
+            const contextResult = await contextResponse.json();
+            console.log("Réponse de l'API pour le contexte:", contextResult);
+            
+            const context = contextResult[0]?.generated_text || 'Aucun contexte généré.';
+                
+            // Étape 2: Générer des questions à partir du contexte
+            const questionsResponse = await fetch(API_URL, {
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    inputs: {
+                        question: `Peux tu générer ${numberOfQuestions} questions pour étudiant sur le sujet: ${topic}`,
+                        context: context
+                    }
+                }),  
+            });
+    
+            const questionsResult = await questionsResponse.json();
+            console.log("Réponse de l'API pour les questions:", questionsResult);
+    
+            // Extraction des questions de la réponse
+            const questions = questionsResult.generated_text ? questionsResult.generated_text.split('\n') : [];
+            
+            if (questions.length) {
+                // Filtrer les questions pour n'en garder que le nombre demandé
+                const filteredQuestions = questions.slice(0, numberOfQuestions);
+                res.json({ quiz: filteredQuestions });
+            } else {
+                res.status(500).json({ error: 'Aucune question générée par l\'API Hugging Face.' });
+            }
+        } catch (err) {
+            console.error("Erreur lors de la génération du quiz :", err.message);
+            res.status(500).json({ error: `Erreur lors de la génération du quiz: ${err.message}` });
+        }
+    },
+    
+
+    summary: async (req, res) => {
+        const { text } = req.body;
+        const API_URL = 'https://api-inference.huggingface.co/models/facebook/bart-large-cnn';
+        const API_TOKEN = process.env.HUGGING_FACE_API_KEY;
+
+        if (!API_TOKEN) {
+            return res.status(500).json({ error: 'API token Hugging Face non défini.' });
+        }
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ inputs: text }),
+            });
+
+            const result = await response.json();
+            
+            if (result && result[0] && result[0].summary_text) {
+                res.json({ summary: result[0].summary_text });
+            } else {
+                res.status(500).json({ error: 'Erreur : réponse inattendue de l\'API Hugging Face.' });
+            }
+        } catch (err) {
+            console.error("Erreur lors de la génération du résumé :", err.message);
+            res.status(500).json({ error: 'Erreur lors de la génération du résumé.' });
+        }
+    },
 
 
-exports.generateQuiz = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
-    const { topic, numberOfQuestions } = req.body;
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-                { role: "system", content: "Tu es un assistant qui crée des quizz pour aider les étudiants à réviser." },
-                { role: "user", content: `Crée un quizz de ${numberOfQuestions} questions avec leurs réponses sur le sujet suivant : ${topic}. Formate les résultats sous forme de liste avec la question et la réponse correspondante.` },
-            ],
-        });
-
-        const quizText = response.data.choices[0].message.content;
-
-
-        const quizArray = quizText.split('\n').filter(line => line.trim() !== '').map((item) => {
-            const [question, answer] = item.split('?');
-            return {
-                question: question ? question.trim() + '?' : '',
-                answer: answer ? answer.trim() : ''
-            };
-        });
-
-        res.json({ quiz: quizArray });
-    } catch (err) {
-        if (err.response) {
-            res.status(err.response.status).json({ error: err.response.data });
-        } else {
-            console.error("Erreur lors de la génération du quizz :", err);
-            res.status(500).json({ error: 'Erreur lors de la génération du quizz.' });
+    expliq: async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            console.log('Erreurs de validation:', errors.array());
+            return res.status(400).json({ errors: errors.array() });
+        }
+    
+        const { context, question } = req.body;
+        console.log('Données reçues:', { context, question });
+        const API_URL = 'https://api-inference.huggingface.co/models/deepset/roberta-base-squad2'; 
+        const API_TOKEN = process.env.HUGGING_FACE_API_KEY;
+    
+        if (!API_TOKEN) {
+            return res.status(500).json({ error: 'API token Hugging Face non défini.' });
+        }
+    
+        try {
+            const questionsResponse = await fetch(API_URL, {
+                headers: {
+                    Authorization: `Bearer ${API_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    inputs: {
+                        question: question,
+                        context: context
+                    }
+                }),  
+            });
+    
+            const questionsResult = await questionsResponse.json();
+            console.log("Réponse de l'API pour les questions:", questionsResult);
+    
+            // Vérification que la réponse contient les données attendues
+            if (!questionsResult || typeof questionsResult !== 'object' || !questionsResult.answer) {
+                return res.status(500).json({ error: 'Aucune question générée par l\'API Hugging Face.' });
+            }
+    
+            // Envoi de la réponse
+            res.json({ expliq: questionsResult });
+    
+        } catch (err) {
+            console.error("Erreur lors de la génération du quiz :", err.message);
+            res.status(500).json({ error: `Erreur lors de la génération du quiz: ${err.message}` });
         }
     }
-}
+    
+};
+
+export default askController;

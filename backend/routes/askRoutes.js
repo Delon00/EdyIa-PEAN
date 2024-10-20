@@ -1,11 +1,18 @@
-const express = require('express');
-const { body, validationResult } = require('express-validator');
+//backend/routes/askRoutes.js
+import express from 'express';
+import { body } from 'express-validator';
+import askController from '../controllers/askController.js';
+
 const router = express.Router();
-const askController = require('../controllers/askController');
 
-router.post('/generate-quiz', [
-    body('topic').isString().notEmpty(),
-    body('numberOfQuestions').isInt({ gt: 0 })
-], askController.generateQuiz);
+router.post('/quiz', [
+    body('topic').notEmpty().withMessage('Le sujet est requis.'),
+    body('numberOfQuestions').isInt({ min: 1 }).withMessage('Le nombre de questions doit être un entier positif.'),
+], askController.quiz);
 
-module.exports = router;
+router.post('/expliq', askController.expliq);
+
+router.post('/summary', askController.summary);
+
+export default router;
+
