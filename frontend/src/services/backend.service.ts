@@ -1,3 +1,4 @@
+// backend.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -13,6 +14,9 @@ import { decodeJwt } from './decodeJwt';
 export class BackendService {
   private authUrl = 'http://localhost:8080/auth';
   private userUrl = 'http://localhost:8080/user';
+  private askUrl = 'http://localhost:8080/ask/';
+
+
   constructor(private http: HttpClient, private router: Router) {}
 
   private handleError(error: HttpErrorResponse) {
@@ -27,6 +31,19 @@ export class BackendService {
     }
     return throwError(() => ({ status: error.status, message: errorMessage }));
   }
+
+  askQuestion(question: string): Observable<any> {
+    return this.http.post<any>(this.askUrl, { question });
+  }
+
+  generateQuiz(topic: string, numberOfQuestions: number): Observable<any> {
+    return this.http.post<any>(`${this.askUrl}/generate-quiz`, { topic, numberOfQuestions })
+        .pipe(
+            catchError(this.handleError)
+        );
+}
+
+  
 
   register(user: Register): Observable<any> {
     return this.http.post<any>(`${this.authUrl}/register`, user, {
