@@ -33,7 +33,7 @@ nav {
         padding:0.1rem 0.5rem;
 
         input:focus {
-            outline: none;                    
+            outline: none;
         }
     }
 
@@ -49,16 +49,17 @@ nav {
         border-radius: 15px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         animation: fadeIn 0.2s ease-in-out;
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+        @keyframes fadeIn {0% { opacity: 0; }100% { opacity: 1; }}
     }
-    
-    
-    
-    
+
+    a:hover{
+      color: #fdb629;
+      transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+
+
+
 
 }
 
@@ -111,7 +112,7 @@ nav {
             width: 50px;
         }
     }
-    
+
 
 }
 

@@ -42,13 +42,14 @@
             <i class="pi pi-search"></i>
         </div>
     </div>
-    <button (click)="menuProfile() " class="profile-btn-resp"><img src="img/profile.png" alt="logo" title="profile"></button>
+    <button (click)="menuProfile() " class="profile-btn"><img src="img/profile.png" alt="logo" title="profile"></button>
     <div *ngIf="isProfileMenuOpen" class="profile-menu">
         <div class="flex justify-between">
-            <p>Menu</p>
+            <p class="font-semibold">Menu</p>
             <button class="close" (click)="menuProfile()" title="Fermer"></button>
         </div>
         <hr>
+        <a routerLink="/dashboard" class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-home"></i> Tableau de bord</a>
         <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-user"></i> Profile</a>
         <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Paramètres</a>
         <hr>
