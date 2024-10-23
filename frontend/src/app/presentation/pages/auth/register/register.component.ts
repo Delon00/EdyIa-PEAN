@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Register } from '../../../interfaces/register';
+import { Register } from '@interfaces/register';
 import { Router, RouterModule, RouterLink } from '@angular/router';
-import { BackendService } from '../../../services/backend.service';
+import { UserService } from '@app/core/services/user.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FloatLabelModule, ReactiveFormsModule, RouterModule, RouterLink],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'] // Correction ici, 'styleUrls' au pluriel
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  isRegisterFormVisible = false; // Renommée pour être plus explicite
+  isRegisterFormVisible = false;
   errorMessage: string = '';
   emailError: string = '';
   passwordError: string = '';
@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   
   isLoading: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private service: BackendService) {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
     this.formRegister = this.fb.group({
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
@@ -51,10 +51,10 @@ export class RegisterComponent implements OnInit {
     if (this.formRegister.valid) {
       this.isLoading = true;
       this.userregister = this.formRegister.value;
-      this.service.register(this.userregister).subscribe(
+      this.userService.register(this.userregister).subscribe(
         (response: any) => {
           if (response && response.message === 'Utilisateur créé avec succès') {
-            this.service.saveUserData(response.token, response.user);
+            this.userService.saveUserData(response.token, response.user);
             this.router.navigate(['/dashboard']);
           } else {
             console.error('Réponse inattendue', response);

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Login } from '../../interfaces/login';
+import { Login } from '@interfaces/login';
 import { Router, RouterModule, RouterLink } from '@angular/router';
-import { BackendService } from '../../services/backend.service';
+import { BaseService } from '@services/base.service';
+import { UserService } from '@services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   };
   isLoading: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private service: BackendService) {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
     this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -46,9 +47,9 @@ export class HomeComponent implements OnInit {
     if (this.formLogin.valid) {
       this.isLoading = true;
       this.userlogin = this.formLogin.value;
-      this.service.login(this.userlogin).subscribe(
+      this.userService.login(this.userlogin).subscribe(
         (response: any) => {
-          this.service.saveUserData(response.token, response.user);
+          this.userService.saveUserData(response.token, response.user);
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         },

@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
 
-import { authGuard } from '../services/auth.guard';
-import { homeGuard } from '../services/home.guard';
-import { registerGuard } from '../services/register.guard';
+import { authGuard } from '@guards/auth.guard';
+import { homeGuard } from '@guards/home.guard';
+import { registerGuard } from '@guards/register.guard';
 
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './auth/dashboard/dashboard.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { QuizComponent } from './modules-pages/quiz/quiz.component';
-import { ExpliqComponent } from './modules-pages/expliq/expliq.component';
+import { HomeComponent } from '@pages/home/home.component';
+import { RegisterComponent } from '@pages/auth/register/register.component';
+import { DashboardComponent } from '@pages/auth/dashboard/dashboard.component';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
+import { QuizComponent } from '@pages/modules-pages/quiz/quiz.component';
+import { ExpliqComponent } from '@pages/modules-pages/expliq/expliq.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [homeGuard] },

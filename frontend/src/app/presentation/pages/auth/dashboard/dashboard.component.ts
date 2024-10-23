@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BackendService } from '../../../services/backend.service';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../interfaces/user';
 import { Router, RouterModule, RouterLink } from '@angular/router';
+import { UserService } from '@app/core/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,10 +16,10 @@ export class DashboardComponent implements OnInit {
   isMenuModuleOpen: boolean = false;
   user: any = null;
 
-  constructor(private backendService: BackendService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.backendService.getUser().subscribe({
+    this.userService.getUser().subscribe({
       next: (data) => {
         if (data && data.user) {
           this.user = data.user;
@@ -30,6 +29,7 @@ export class DashboardComponent implements OnInit {
         }
       },
       error: (err) => {
+        this.userService.logout();
         console.error("Erreur lors de la récupération de l'utilisateur:", err);
       }
     });
@@ -48,8 +48,5 @@ export class DashboardComponent implements OnInit {
     this.isProfileMenuOpenResponsive = !this.isProfileMenuOpenResponsive;
   }
 
-  logout() {
-    this.backendService.logout();
-    this.router.navigate(['/']);
-  }
+  logout() {this.userService.logout();}
 }

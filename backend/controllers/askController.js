@@ -1,5 +1,9 @@
+//backend/controller/askController.js
 import fetch from 'node-fetch';
 import { validationResult } from 'express-validator';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 const askController = {
     quiz: async (req, res) => {
@@ -109,7 +113,8 @@ const askController = {
             return res.status(400).json({ errors: errors.array() });
         }
     
-        const { context, question } = req.body;
+        const { context, question, userId } = req.body;
+
         console.log('Données reçues:', { context, question });
         const API_URL = 'https://api-inference.huggingface.co/models/deepset/roberta-base-squad2'; 
         const API_TOKEN = process.env.HUGGING_FACE_API_KEY;
@@ -136,12 +141,32 @@ const askController = {
             const questionsResult = await questionsResponse.json();
             console.log("Réponse de l'API pour les questions:", questionsResult);
     
-            // Vérification que la réponse contient les données attendues
             if (!questionsResult || typeof questionsResult !== 'object' || !questionsResult.answer) {
                 return res.status(500).json({ error: 'Aucune question générée par l\'API Hugging Face.' });
             }
-    
-            // Envoi de la réponse
+
+            
+
+            const userJetons = await prisma.jeton.findFirst({
+                where: {userId: userId}
+            });
+
+            if (!userJetons) {
+                return res.status(400).json({ error: 'Aucun jeton trouvé pour cet utilisateur.' });
+            }
+
+            if (userJetons.amount < 15) {
+                return res.status(400).json({ error: 'Nombre insuffisant de jetons.' });
+            }
+
+            const updatedJetons = await prisma.jeton.update({
+                where: { id: userJetons.id },
+                data: {
+                    amount: { decrement: 15 }
+                }
+            });
+
+            res.json({ message: 'Jetons décrémentés avec succès.' });
             res.json({ expliq: questionsResult });
     
         } catch (err) {
