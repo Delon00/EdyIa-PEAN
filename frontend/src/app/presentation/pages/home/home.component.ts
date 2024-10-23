@@ -6,6 +6,7 @@ import { Login } from '@interfaces/login';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { BaseService } from '@services/base.service';
 import { UserService } from '@services/user.service';
+import { LocalStorageService } from '@app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
   };
   isLoading: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private localStorage:LocalStorageService) {
     this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -50,6 +51,8 @@ export class HomeComponent implements OnInit {
       this.userService.login(this.userlogin).subscribe(
         (response: any) => {
           this.userService.saveUserData(response.token, response.user);
+          this.localStorage.createToken(response.token)
+          console.log(this.localStorage.getToken())
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         },

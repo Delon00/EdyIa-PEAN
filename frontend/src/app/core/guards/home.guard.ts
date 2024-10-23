@@ -1,6 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-
 import { UserService } from '@services/user.service';
 
 export const homeGuard: CanActivateFn = () => {

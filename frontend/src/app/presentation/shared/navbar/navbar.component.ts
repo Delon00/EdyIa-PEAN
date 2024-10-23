@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserService } from '@app/core/services/user.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
   isProfileMenuOpenResponsive: boolean = false;
+  isProfileMenuOpen: boolean = false;
+
   isMenuModuleOpen: boolean = false;
   user: any = null;
 
@@ -20,7 +23,6 @@ export class NavbarComponent implements OnInit {
       next: (data) => {
         if (data && data.user) {
           this.user = data.user;
-          console.log('Utilisateur récupéré:', this.user);
         } else {
           console.error("Aucune donnée d'utilisateur reçue.");
         }
@@ -35,7 +37,12 @@ export class NavbarComponent implements OnInit {
     this.isMenuModuleOpen = !this.isMenuModuleOpen;
   }
 
+  menuProfile() {
+    this.isProfileMenuOpen = !this.isProfileMenuOpen;
+  }
+
   menuProfileResponsive() {
     this.isProfileMenuOpenResponsive = !this.isProfileMenuOpenResponsive;
   }
+  logout() {this.userService.logout();}
 }

@@ -1,4 +1,36 @@
-<main>
+<div *ngIf="isMenuModuleOpen" class="menu-module-container">
+    <div class="menu-module">
+        <div class="flex justify-between items-center w-full mb-1"><h5 class="m-0">Modules</h5><button class="close" (click)="menuModule()" title="Fermer"></button></div>
+        <hr>
+        <div class="module-card-container">
+            <div class="module-card c1">
+                <h6>Pdf Scan</h6>
+                <div class="flex justify-between items-center px-3">
+                    <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                    <img src="img/pdf.png" alt=""></div>
+            </div>
+            <div class="module-card c2">
+                <h6>Cours expliq</h6>
+                <div class="flex justify-between items-center px-3">
+                    <a routerLink="/expliq"><i class="pi pi-arrow-right"></i></a>
+                    <img src="img/cours.png" alt=""></div>
+            </div>
+            <div class="module-card c3">
+                <h6>Quizz</h6>
+                <div class="flex justify-between items-center px-3">
+                    <a routerLink="/quiz"><i class="pi pi-arrow-right"></i></a>
+                    <img src="img/quizz.png" alt=""></div>
+            </div>
+            <div class="module-card c4">
+                <h6>Pdf Scan</h6>
+                <div class="flex justify-between items-center px-3">
+                    <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
+                    <img src="img/pdf.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav>
     <div class="flex items-center gap-2">
         <button (click)="menuModule()" class="btn-link flex justify-center" title="Commencer"><i class="pi pi-plus"></i></button>
         <span class="token">{{ user.jetons.length > 0 ? user.jetons[0].amount : 0 }} <img src="img/coin.png" alt=""></span>
@@ -10,37 +42,17 @@
             <i class="pi pi-search"></i>
         </div>
     </div>
-    <button (click)="menuProfileResponsive() " class="profile-btn-resp"><img src="img/profile.png" alt="logo" title="profile"></button>
-    <div *ngIf="isMenuModuleOpen" class="menu-module-container">
-        <div class="menu-module">
-            <div class="flex justify-between items-center w-full mb-1"><h5 class="m-0">Modules</h5><button class="close" (click)="menuModule()" title="Fermer"></button></div>
-            <hr>
-            <div class="module-card-container">
-                <div class="module-card c1">
-                    <h6>Pdf Scan</h6>
-                    <div class="flex justify-between items-center px-3">
-                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
-                        <img src="img/pdf.png" alt=""></div>
-                </div>
-                <div class="module-card c2">
-                    <h6>Cours expliq</h6>
-                    <div class="flex justify-between items-center px-3">
-                        <a routerLink="/expliq"><i class="pi pi-arrow-right"></i></a>
-                        <img src="img/cours.png" alt=""></div>
-                </div>
-                <div class="module-card c3">
-                    <h6>Quizz</h6>
-                    <div class="flex justify-between items-center px-3">
-                        <a routerLink="/quiz"><i class="pi pi-arrow-right"></i></a>
-                        <img src="img/quizz.png" alt=""></div>
-                </div>
-                <div class="module-card c4">
-                    <h6>Pdf Scan</h6>
-                    <div class="flex justify-between items-center px-3">
-                        <a routerLink="/"><i class="pi pi-arrow-right"></i></a>
-                        <img src="img/pdf.png" alt=""></div>
-                </div>
-            </div>
+    <button (click)="menuProfile() " class="profile-btn-resp"><img src="img/profile.png" alt="logo" title="profile"></button>
+    <div *ngIf="isProfileMenuOpen" class="profile-menu">
+        <div class="flex justify-between">
+            <p>Menu</p>
+            <button class="close" (click)="menuProfile()" title="Fermer"></button>
         </div>
+        <hr>
+        <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-user"></i> Profile</a>
+        <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Paramètres</a>
+        <hr>
+        <button class="flex gap-3 items-center cursor-pointer my-2 hover:text-red-500" (click)="logout()"> <i class="pi pi-sign-out"></i> Déconnexion</button>
     </div>
-</main>
+
+</nav>

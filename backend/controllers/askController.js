@@ -107,11 +107,7 @@ const askController = {
 
 
     expliq: async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            console.log('Erreurs de validation:', errors.array());
-            return res.status(400).json({ errors: errors.array() });
-        }
+
     
         const { context, question, userId } = req.body;
 
@@ -124,6 +120,16 @@ const askController = {
         }
     
         try {
+
+            const userJetons = await prisma.jeton.findFirst({
+                where: {userId: userId}
+            });
+
+
+            if (userJetons.amount < 15) {
+                return res.status(400).json({ error: 'Nombre insuffisant de jetons 🥲.' });
+            }
+            
             const questionsResponse = await fetch(API_URL, {
                 headers: {
                     Authorization: `Bearer ${API_TOKEN}`,
@@ -145,33 +151,18 @@ const askController = {
                 return res.status(500).json({ error: 'Aucune question générée par l\'API Hugging Face.' });
             }
 
-            
-
-            const userJetons = await prisma.jeton.findFirst({
-                where: {userId: userId}
-            });
-
-            if (!userJetons) {
-                return res.status(400).json({ error: 'Aucun jeton trouvé pour cet utilisateur.' });
-            }
-
-            if (userJetons.amount < 15) {
-                return res.status(400).json({ error: 'Nombre insuffisant de jetons.' });
-            }
+        
 
             const updatedJetons = await prisma.jeton.update({
                 where: { id: userJetons.id },
-                data: {
-                    amount: { decrement: 15 }
-                }
+                data: {amount: { decrement: 15 }}
             });
 
-            res.json({ message: 'Jetons décrémentés avec succès.' });
             res.json({ expliq: questionsResult });
     
         } catch (err) {
-            console.error("Erreur lors de la génération du quiz :", err.message);
-            res.status(500).json({ error: `Erreur lors de la génération du quiz: ${err.message}` });
+            console.error("Erreur lors de la génération  :", err.message);
+            res.status(500).json({ error: `Erreur lors de la génération de l'explication: ${err.message}` });
         }
     }
     

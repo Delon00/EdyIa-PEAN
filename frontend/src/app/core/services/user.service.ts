@@ -27,16 +27,7 @@ export class UserService {
     }
     return throwError(() => ({ status: error.status, message: errorMessage }));
   }
-
-  getUser(): Observable<any> {
-    const userId = this.getUserId();
-    return this.http.get<any>(`${this.userUrl}/getUser/${userId}`, {
-      headers: new HttpHeaders({ 'Authorization': `Bearer ${this.localService.getToken()}` })
-    }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
+  
   getUserId(): string | null {
     const token = this.localService.getToken();
     if (!token) return null;
@@ -48,6 +39,17 @@ export class UserService {
       return null; 
     }
   }
+
+  getUser(): Observable<any> {
+    const userId = this.getUserId();
+    return this.http.get<any>(`${this.userUrl}/getUser/${userId}`, {
+      headers: new HttpHeaders({ 'Authorization': `Bearer ${this.localService.getToken()}` })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
+
 
   saveUserData(token: string, user: User): void {
     if (typeof window !== 'undefined') {
@@ -68,10 +70,7 @@ export class UserService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.authUrl}/login`, credentials, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }).pipe(
-      tap(response => this.localService.createToken(response.token)),
-      catchError(this.handleError)
-    );
+    }).pipe(catchError(this.handleError));
   }
 
   logout(): void {
