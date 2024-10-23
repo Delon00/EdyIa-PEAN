@@ -11,7 +11,7 @@ import { NavbarComponent } from "@shared/navbar/navbar.component";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NavbarComponent],
   templateUrl: './expliq.component.html',
-  styleUrl: './expliq.component.scss'
+  styleUrl: './expliq.component.scss',
 })
 export class ExpliqComponent implements OnInit {
   formExpliq: FormGroup;
@@ -62,7 +62,7 @@ export class ExpliqComponent implements OnInit {
           this.errorMessage = error.message;
         } else if (error.status === 500) {
           this.errorMessage = 'Erreur serveur, veuillez réessayer plus tard.';
-          console.error('Erreur lors de la génération de l\'explication:', error); 
+          console.error('Erreur lors de la génération de l\'explication:', error);
         } else {
           this.errorMessage = 'Erreur lors de la génération de l\'explication. Veuillez réessayer.';
         }

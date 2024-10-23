@@ -119,7 +119,8 @@ nav {
 @media screen and (max-width: 768px) {
     .right{display: none;}
     .profile-btn-resp{display: block;}
-
+    nav .search-container {display: none;}
+    nav .menu-btn-seacrh{display: block;}
 
 
 }
