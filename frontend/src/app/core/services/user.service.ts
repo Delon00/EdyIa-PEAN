@@ -27,7 +27,7 @@ export class UserService {
     }
     return throwError(() => ({ status: error.status, message: errorMessage }));
   }
-  
+
   getUserId(): string | null {
     const token = this.localService.getToken();
     if (!token) return null;
@@ -36,7 +36,7 @@ export class UserService {
       return decoded.userId;
     } catch (error) {
       console.error('Erreur lors du décodage du token:', error);
-      return null; 
+      return null;
     }
   }
 
@@ -48,13 +48,12 @@ export class UserService {
       catchError(this.handleError)
     );
   }
-  
 
 
-  saveUserData(token: string, user: User): void {
+
+  saveUserData( user: User): void {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      sessionStorage.setItem('user', JSON.stringify(user));
     }
   }
 

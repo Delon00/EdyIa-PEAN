@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       this.userlogin = this.formLogin.value;
       this.userService.login(this.userlogin).subscribe(
         (response: any) => {
-          this.userService.saveUserData(response.token, response.user);
+          this.userService.saveUserData(response.user);
           this.localStorage.createToken(response.token)
           console.log(this.localStorage.getToken())
           this.router.navigate(['/dashboard']);

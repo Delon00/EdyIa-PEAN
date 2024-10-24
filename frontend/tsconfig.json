@@ -34,6 +34,7 @@
       "@utils/*":["src/app/utils/*"],
       "@pages/*":["src/app/presentation/pages/*"],
       "@shared/*":["src/app/presentation/shared/*"],
+      "@layout/*":["src/app/presentation/layout/*"],
     }
   },
   "angularCompilerOptions": {

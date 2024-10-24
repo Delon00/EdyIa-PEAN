@@ -39,7 +39,7 @@ const authController = {
                 },
             });
 
-            const initialJetons = parseInt(process.env.INITIAL_JETONS) || 100;
+            const initialJetons = parseInt(process.env.INITIAL_JETONS) || 150;
             const userJeton = await prisma.jeton.create({
                 data: {
                     userId: newUser.id,

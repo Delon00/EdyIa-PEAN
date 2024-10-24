@@ -4,7 +4,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Register } from '@interfaces/register';
 import { Router, RouterModule, RouterLink } from '@angular/router';
-import { UserService } from '@app/core/services/user.service';
+import { UserService } from '@services/user.service';
+import { LocalStorageService } from '@services/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -25,10 +26,10 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: '',
   };
-  
+
   isLoading: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService) {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private localServices: LocalStorageService) {
     this.formRegister = this.fb.group({
       nom: ['', [Validators.required]],
       prenom: ['', [Validators.required]],
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   showRegisterForm() {
-    this.isRegisterFormVisible = true; // Utilisation de la nouvelle propriété
+    this.isRegisterFormVisible = true;
   }
 
   hideRegisterForm() {
@@ -54,7 +55,8 @@ export class RegisterComponent implements OnInit {
       this.userService.register(this.userregister).subscribe(
         (response: any) => {
           if (response && response.message === 'Utilisateur créé avec succès') {
-            this.userService.saveUserData(response.token, response.user);
+            this.localServices.createToken(response.token)
+            this.userService.saveUserData(response.user);
             this.router.navigate(['/dashboard']);
           } else {
             console.error('Réponse inattendue', response);
@@ -76,5 +78,5 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = "Veuillez remplir correctement le formulaire.";
     }
   }
-  
+
 }

@@ -1,0 +1,15 @@
+<main *ngIf="userData; else loading">
+  <app-navbar></app-navbar>
+  <aside>
+    <div class="flex">
+      <img [src]="userData.url_profile" alt="Profile Picture">
+      <div>
+        <h5>{{ userData.prenom }}</h5>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

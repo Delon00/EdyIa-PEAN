@@ -40,7 +40,7 @@ main {
                 padding:0.1rem 0.5rem;
 
                 input:focus {
-                    outline: none;                    
+                    outline: none;
                 }
             }
         }
@@ -65,7 +65,7 @@ main {
             background: linear-gradient(to right, #383B1C 0%, #FFC224 59%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
+
 
         }
         .modules-container{
@@ -141,7 +141,7 @@ main {
                 padding:0.1rem 0.5rem;
 
                 input:focus {
-                    outline: none;                    
+                    outline: none;
                 }
             }
             .profile-menu {
@@ -160,6 +160,13 @@ main {
                     0% { opacity: 0; }
                     100% { opacity: 1; }
                 }
+
+
+
+              a:hover{
+                color: #fdb629;
+                transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+              }
             }
         }
     }
@@ -222,7 +229,7 @@ main {
             width: 50px;
         }
     }
-    
+
 
 }
 

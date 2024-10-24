@@ -3,7 +3,7 @@
         <nav>
             <div class="flex items-center gap-2">
                 <button (click)="menuModule()" class="btn-link flex justify-center" title="Commencer"><i class="pi pi-plus"></i></button>
-                <span class="token">{{ user.jetons.length > 0 ? user.jetons[0].amount : 0 }} <img src="img/coin.png" alt=""></span>
+                <a class="token">{{ user.jetons.length > 0 ? user.jetons[0].amount : 0 }} <img src="img/coin.png" alt=""></a>
             </div>
             <div class="flex gap-3 items-center search-div">
 
@@ -98,8 +98,7 @@
                     <button class="close" (click)="menuProfile()" title="Fermer"></button>
                 </div>
                 <hr>
-                <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-user"></i> Profile</a>
-                <a class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Paramètres</a>
+                <a routerLink="/compte" class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Mon compte</a>
                 <hr>
                 <button class="flex gap-3 items-center cursor-pointer my-2 hover:text-red-500" (click)="logout()"> <i class="pi pi-sign-out"></i> Déconnexion</button>
             </div>
