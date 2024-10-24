@@ -11,9 +11,10 @@ import { NotFoundComponent } from '@pages/not-found/not-found.component';
 import { QuizComponent } from '@pages/modules-pages/quiz/quiz.component';
 import { ExpliqComponent } from '@pages/modules-pages/expliq/expliq.component';
 import { SettingsComponent } from '@layout/settings/settings.component';
-import { ProfileComponent } from './presentation/shared/profile/profile.component';
-import { PreferenceComponent } from './presentation/shared/preference/preference.component';
-import { AbonnementComponent } from './presentation/shared/abonnement/abonnement.component';
+import { ProfileComponent } from '@shared/profile/profile.component';
+import { PreferenceComponent } from '@shared/preference/preference.component';
+import { AbonnementComponent } from '@shared/abonnement/abonnement.component';
+import { SecuriteConfidentialiteComponent } from '@shared/securite-confidentialite/securite-confidentialite.component';
 
 
 export const routes: Routes = [
@@ -28,6 +29,7 @@ export const routes: Routes = [
         { path: 'profile', component: ProfileComponent },
         { path: 'abonnement', component: AbonnementComponent },
         { path: 'preference', component: PreferenceComponent },
+        { path: 'securite-confidentialite', component: SecuriteConfidentialiteComponent },
       ]
     },
 

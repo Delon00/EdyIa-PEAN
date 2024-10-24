@@ -1,4 +1,4 @@
-<main *ngIf="user">
+<main *ngIf="user; else loading">
     <section class="left">
         <nav>
             <div class="flex items-center gap-2">
@@ -140,3 +140,6 @@
         </div>
     </div>
 </main>
+<ng-template #loading>
+  <app-loader/>
+</ng-template>

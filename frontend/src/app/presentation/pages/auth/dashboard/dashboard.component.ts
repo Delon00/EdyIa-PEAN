@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { UserService } from '@app/core/services/user.service';
+import { LoaderComponent } from '@app/presentation/shared/loader/loader.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [CommonModule, RouterModule, RouterLink]
+  imports: [CommonModule, RouterModule, RouterLink, LoaderComponent]
 })
 export class DashboardComponent implements OnInit {
   isProfileMenuOpen: boolean = false;

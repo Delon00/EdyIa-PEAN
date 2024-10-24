@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cloudinary from './utils/cloudinary.js'
 
 dotenv.config();
 
@@ -10,16 +11,17 @@ const app = express();
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import askRoutes from './routes/askRoutes.js';
-//const OpenAI = require('openai');
+import cloudinaryRoutes from './routes/cloudinaryRoutes.js';
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+ 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/ask', askRoutes);
+app.use('/cloudinary', cloudinaryRoutes);
 
 //const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY,});
 // app.post('/ask', async (req, res) => {
