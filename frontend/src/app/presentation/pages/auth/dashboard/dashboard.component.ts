@@ -13,7 +13,7 @@ import { LoaderComponent } from '@app/presentation/shared/loader/loader.componen
 })
 export class DashboardComponent implements OnInit {
   isProfileMenuOpen: boolean = false;
-  isProfileMenuOpenResponsive: boolean = false;
+  isProfileMenuResOpen: boolean = false;
   isMenuModuleOpen: boolean = false;
   user: any = null;
 
@@ -45,8 +45,8 @@ export class DashboardComponent implements OnInit {
     this.isMenuModuleOpen = !this.isMenuModuleOpen;
   }
 
-  menuProfileResponsive() {
-    this.isProfileMenuOpenResponsive = !this.isProfileMenuOpenResponsive;
+  menuProfileRes() {
+    this.isProfileMenuResOpen = !this.isProfileMenuResOpen;
   }
 
   logout() {this.userService.logout();}
