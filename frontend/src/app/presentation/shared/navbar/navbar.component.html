@@ -42,7 +42,7 @@
             <i class="pi pi-search"></i>
         </div>
     </div>
-    <button (click)="menuProfile() " class="profile-btn"><img src="img/profile.png" alt="logo" title="profile"></button>
+    <button (click)="menuProfile() " class="profile-btn"><img [src]="user.url_profile" alt="logo" title="profile"></button>
     <div *ngIf="isProfileMenuOpen" class="profile-menu">
         <div class="flex justify-between">
             <p class="font-semibold">Menu</p>

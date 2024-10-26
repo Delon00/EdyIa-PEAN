@@ -4,19 +4,33 @@ main{
     height: 89dvh;
     display: flex;
 
-
+    aside.responsive{
+      display: none;
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      width: 20%;
+      height: 100%;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      animation: slideIn 0.5s ease forwards;
+    }
     aside{
       border-top: 1px solid #00000010;
       border-right: 1px solid #00000010;
-      width: 18%;
+      width: 20%;
       height: 100%;
       padding: 1rem;
       background: rgb(255,241,206);
       background: linear-gradient(135deg, rgba(255,241,206,1) 0%, rgba(242,255,241,1) 100%);
+      animation: slideIn 0.5s ease forwards;
+
+
+      h4{display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem;}
 
       a {
         display: flex;
         align-items: center;
+        justify-content: flex-start;
         gap: 1rem;
         margin: 2rem 0;
         transition: all 0.3s ease;
@@ -24,6 +38,8 @@ main{
 
       a.current {
         padding-left: 0.5rem;
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
         background-color: #ffc224;
         border-radius: 15px;
         color: #fff;
@@ -31,12 +47,41 @@ main{
       }
 
       a:hover {
-        padding-left: 1rem;
+        padding-left: 0.7rem;
         border-radius: 15px;
       }
+      a.current:hover{padding-left: 0.4rem;}
     }
-
-
   }
 
+}
+
+.aside-btn{
+  padding: 0.2rem 0.5rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 100px;
+  background-color: #ffc224;
+  color: #fff;
+  border-radius: 0 15px 15px 0;
+  z-index: 1;
+}
+.aside-btn.open{left: 70px;}
+.aside-btn.open i{transform: rotate(180deg);transition: all 0.3s ease;}
+
+@media screen and (max-width: 868px) {
+  main section aside{width: 10%;}
+  main section aside span{display: none;}
+  main section aside a.current{justify-content: center;padding-left: 0;}
+  main section aside h4{justify-content: center;}
+
+}
+@media screen and (max-width: 768px) {}
+@media screen and (max-width: 668px) {
+  main section aside{display: none;}
+  main section aside.responsive{display: block;}
+  .aside-btn{display: flex;}
 }

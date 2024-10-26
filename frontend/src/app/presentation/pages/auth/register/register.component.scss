@@ -26,7 +26,7 @@ main {
 
     }
     .right {
-        width: 60%;
+        width: 90%;
         padding: 0.1rem 2rem;
         display: flex;
         flex-direction: column;
@@ -40,6 +40,14 @@ main {
             justify-content: space-between;
             align-items: center;
 
+            button.btn-link{min-height: 35px;}
+            .group-input{
+              width: 100%;
+              display: flex;
+              align-items: center;
+              gap: 1rem;
+            }
+
             input{
                 border-radius: 17px;
                 border: 1px solid #ccc;
@@ -52,3 +60,13 @@ main {
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+  main .left{display: none;}
+  main .right{width: 100%; animation: slideIn 0.5s ease-in-out;} @keyframes slideIn {from {transform: translateX(50%);opacity: 0;}to {transform: translateX(0);opacity: 1;}}
+
+}
+@media screen and (max-width: 500px) {
+  main .right form .group-input{flex-wrap: wrap; gap: 0rem;}
+}
+

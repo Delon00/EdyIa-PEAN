@@ -1,29 +1,26 @@
 <main *ngIf="userData; else loading">
   <app-navbar></app-navbar>
   <section >
-    <aside>
-      <div class="flex">
-        <img [src]="userData.url_profile" alt="Profile Picture">
-        <div>
-          <h5>{{ userData.prenom }}</h5>
-          <h6>{{userData.role}}</h6>
-        </div>
-      </div>
-      <hr>
-      <p class="text-sm">Apercu</p>
+    <aside [ngClass]="{'responsive': isAsideOpen}">
       <div>
+        <h4><i class="pi pi-cog"></i><span>Mon profile</span></h4>
+      </div>
+      <hr class="my-3">
+      <div class=" flex-col justify-start">
         <a class="" routerLink="/compte/profile" routerLinkActive="current" ><i class="pi pi-user"></i> <span>Profile</span></a>
         <a class="" routerLink="/compte/abonnement" routerLinkActive="current" ><i class="pi pi-credit-card"></i> <span>Abonnement</span></a>
         <a class="" routerLink="/compte/preference" routerLinkActive="current" ><i class="pi pi-sliders-h"></i> <span>Preference</span></a>
         <a class="" routerLink="/compte/securite-confidentialite" routerLinkActive="current" ><i class="pi pi-shield"></i> <span>Sécurité & confidentialité</span></a>
       </div>
     </aside>
-
+    <button (click)="asideToggle()" type="button" class="aside-btn" [ngClass]="{'open': isAsideOpen}">
+      <i class="pi pi-angle-right"></i>
+    </button>
     <router-outlet></router-outlet>
 
   </section>
 
 </main>
 <ng-template #loading>
-<app-loader/>
+  <app-loader/>
 </ng-template>

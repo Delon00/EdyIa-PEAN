@@ -19,22 +19,22 @@ export class BaseService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-        console.error('Le client a retourné:', error.error.message);
-        errorMessage = error.error.message;
+      console.error('Le client a retourné:', error.error.message);
+      errorMessage = error.error.message;
     } else {
-        console.error(`Le backend a retourné le code ${error.status}, le corps était:`, error.error);
-        errorMessage = error.error.error || error.statusText;
+      console.error(`Le backend a retourné le code ${error.status}, le corps était:`, error.error);
+      errorMessage = error.error.error || error.statusText;
     }
+    return throwError(() => ({ status: error.status, message: errorMessage }));
+  }
 
-    return throwError({ status: error.status, message: errorMessage });
-}
 
   generateExpliq(context: string, question: string): Observable<any> {
     const userId = this.userService.getUserId();
     return this.http.post<any>(`${this.askUrl}/expliq`, { context, question, userId })
     .pipe(catchError(this.handleError));
   }
-  
+
   askQuestion(question: string): Observable<any> {
     return this.http.post<any>(this.askUrl, { question });
   }
@@ -46,7 +46,7 @@ export class BaseService {
 
 
 
-  
+
 
 
 

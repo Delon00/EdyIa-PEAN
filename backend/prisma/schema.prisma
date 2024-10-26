@@ -23,7 +23,7 @@ model User {
   pays               String?
   telephone          String?
   password           String?
-  url_profile        String?
+  url_profile        String? @default("img/profile.PNG")
   role               Role      @default(FREEMIUM)
   jetons             Jeton[]   
   subscription_expired_at DateTime?

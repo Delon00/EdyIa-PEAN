@@ -2,7 +2,6 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import cloudinary from './utils/cloudinary.js'
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ import cloudinaryRoutes from './routes/cloudinaryRoutes.js';
 // Middleware
 app.use(cors());
 app.use(express.json());
- 
+
 // Routes
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);

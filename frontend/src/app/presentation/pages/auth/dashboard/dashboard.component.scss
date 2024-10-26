@@ -9,6 +9,30 @@ main {
             display: flex;
             padding: 1rem 0;
             justify-content: space-between;
+            .profile-menu {
+              position: absolute;
+              width: 300px;
+              top: 55px;
+              right: 10px;
+              background-color: white;
+              border: 1px solid #e0e0e0;
+              padding: 0.5rem;
+              border-radius: 15px;
+              box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+              animation: fadeIn 0.2s ease-in-out;
+
+              @keyframes fadeIn {
+                  0% { opacity: 0; }
+                  100% { opacity: 1; }
+              }
+
+
+
+            a:hover{
+              color: #fdb629;
+              transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+          }
 
             .token{
                 border-radius: 17px;

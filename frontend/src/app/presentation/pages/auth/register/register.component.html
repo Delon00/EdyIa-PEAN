@@ -6,36 +6,65 @@
     </div>
   </section>
   <section class="right">
-    <a routerLink="/"><img class="logo" src="logo.png"  alt="EdyIa"></a>
+    <a routerLink="/"><img class="logo" src="logo.png" alt="EdyIa"></a>
     <form [formGroup]="formRegister" (ngSubmit)="onRegister()">
       <p class="message-error" *ngIf="errorMessage">{{ errorMessage }}</p>
-    <div class="flex flex-col w-full">
-      <label for="nom">Nom</label>
-      <input id="nom" type="text" pInputText formControlName="nom" />
-    </div>
-    <div class="flex flex-col w-full my-2">
-      <label for="prenom">Prénom</label>
-      <input id="prenom" type="text" pInputText formControlName="prenom" />
-    </div>
-    <div class="flex flex-col w-full my-2">
-      <label for="email">Email</label>
-      <input id="email" type="email" pInputText formControlName="email" />
-    </div>
-    <p class="message-error" *ngIf="emailError">{{ emailError }}</p>
-    <div class="flex flex-col w-full my-2">
-      <label for="password">Mot de passe</label>
-      <input id="password" type="password" pInputText formControlName="password" />
-    </div>
-    <p class="message-error" *ngIf="passwordError">{{ passwordError }}</p>
+      <div class="group-input">
+        <div class="flex flex-col w-full">
+          <label for="nom">Nom</label>
+          <input id="nom" type="text" pInputText formControlName="nom" />
+          <div *ngIf="formRegister.controls['nom'].touched && formRegister.controls['nom'].invalid || formRegister.controls['nom'].dirty">
+            <span *ngIf="formRegister.controls['nom'].errors?.['required']" class="message-error">Ce champ est requis</span>
+            <span *ngIf="formRegister.controls['nom'].errors?.['minlength']" class="message-error">Minimum de 2 lettres</span>
+          </div>
+        </div>
+        <div class="flex flex-col w-full my-2">
+          <label for="prenom">Prénom</label>
+          <input id="prenom" type="text" pInputText formControlName="prenom" />
+          <div *ngIf="formRegister.controls['prenom'].touched && formRegister.controls['prenom'].invalid || formRegister.controls['prenom'].dirty">
+            <span *ngIf="formRegister.controls['prenom'].errors?.['required']" class="message-error">Ce champ est requis</span>
+            <span *ngIf="formRegister.controls['prenom'].errors?.['minlength']" class="message-error">Minimum de 2 caractères</span>
+          </div>
+        </div>
+      </div>
 
-    <div class="flex justify-between my-2">
-      <a class="font-semibold text-xs cursor-pointer" routerLink="/forgot-password">Mot de passe oublié ?</a>
-    </div>
-    <button class="btn-link w-full" type="submit" [disabled]="formRegister.invalid || isLoading">
-      <ng-container *ngIf="!isLoading">S'inscrire</ng-container>
-      <ng-container *ngIf="isLoading"><i class="pi pi-spin pi-spinner"></i></ng-container>
-    </button>
-  </form>
-  <p class="text-center">Déjà un compte ? <a class="font-semibold" routerLink="/login">Se connecter</a></p>
+
+      <div class="flex flex-col w-full my-2">
+        <label for="email">Email</label>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <div *ngIf="formRegister.controls['email'].touched && formRegister.controls['email'].invalid || formRegister.controls['email'].dirty">
+          <span *ngIf="formRegister.controls['email'].errors?.['required']" class="message-error">Ce champ est requis</span>
+          <span *ngIf="formRegister.controls['email'].errors?.['email']" class="message-error">Mail incorrect</span>
+        </div>
+      </div>
+      <div class="group-input">
+        <div class="flex flex-col w-full my-2">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" pInputText formControlName="password" />
+          <div *ngIf="formRegister.controls['password'].touched && formRegister.controls['password'].invalid ||formRegister.controls['password'].dirty">
+            <span *ngIf="formRegister.controls['password'].errors?.['required']" class="message-error">Ce champ est requis</span>
+            <span *ngIf="formRegister.controls['password'].errors?.['minlength']" class="message-error">Minimum 8 caractères</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col w-full my-2">
+          <label for="passwordConfirm">Confirmez le mot de passe</label>
+          <input id="passwordConfirm" type="password" pInputText formControlName="passwordConfirm" />
+          <div *ngIf="formRegister.errors?.['mismatch']">
+            <span class="message-error">Aucune correspondence</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex justify-between my-2">
+        <a class="font-semibold text-xs cursor-pointer" routerLink="/forgot-password">Mot de passe oublié ?</a>
+      </div>
+      <button class="btn-link w-full flex items-center justify-center" type="submit" [disabled]="formRegister.invalid || isLoading">
+        <ng-container *ngIf="!isLoading">S'inscrire</ng-container>
+        <ng-container *ngIf="isLoading"><i class="pi pi-spin pi-spinner"></i></ng-container>
+      </button>
+    </form>
+    <p class="text-center w-full">Déjà un compte ? <a class="font-semibold" routerLink="/">Se connecter</a></p>
   </section>
 </main>

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
-dotenv.config(); // Charge les variables d'environnement depuis le fichier .env
+dotenv.config();
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,6 @@ const authController = {
     register: async (req, res) => {
         const { nom, prenom, email, password } = req.body;
 
-        // Ajout de validations simples
         if (!email || !password || !prenom || !nom) {
             return res.status(400).json({ message: 'Tous les champs sont obligatoires.' });
         }

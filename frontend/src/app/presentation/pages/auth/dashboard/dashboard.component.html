@@ -12,7 +12,17 @@
                     <i class="pi pi-search"></i>
                 </div>
             </div>
-            <button (click)="menuProfileResponsive() " class="profile-btn-resp"><img src="img/profile.png" alt="logo" title="profile"></button>
+            <button (click)="menuProfile() " class="profile-btn-resp"><img [src]="user.url_profile" alt="logo" title="profile"></button>
+            <div *ngIf="isProfileMenuOpen" class="profile-menu">
+              <div class="flex justify-between">
+                  <p>Menu</p>
+                  <button class="close" (click)="menuProfile()" title="Fermer"></button>
+              </div>
+              <hr>
+              <a routerLink="/compte" class="flex gap-3 items-center cursor-pointer my-2"> <i class="pi pi-cog"></i> Mon compte</a>
+              <hr>
+              <button class="flex gap-3 items-center cursor-pointer my-2 hover:text-red-500" (click)="logout()"> <i class="pi pi-sign-out"></i> Déconnexion</button>
+          </div>
         </nav>
         <div class="flex flex-col gap-3">
             <h3>Salut, <span class="text-name-user">{{ user.prenom }}!</span></h3>
@@ -91,7 +101,7 @@
                 <button><i class="pi pi-inbox" title="Messages"></i></button>
                 <button><i class="pi pi-bell" title="Notifications" ></i></button>
             </div>
-            <button (click)="menuProfile()"><img src="img/profile.png" alt="logo" title="profile"></button>
+            <button (click)="menuProfile()"><img [src]="user.url_profile" alt="logo" title="profile"></button>
             <div *ngIf="isProfileMenuOpen" class="profile-menu">
                 <div class="flex justify-between">
                     <p>Menu</p>

@@ -2,7 +2,7 @@ nav {
     display: flex;
     padding: 1rem;
     justify-content: space-between;
-
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     .token{
         border-radius: 17px;
         background-color: #000;
@@ -70,6 +70,7 @@ nav {
     align-items: center;
     width: 100vw;
     height: 100dvh;
+    z-index: 3;
     background-color: #0000007e;
 }
 .menu-module{

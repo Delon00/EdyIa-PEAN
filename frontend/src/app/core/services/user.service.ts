@@ -18,15 +18,18 @@ export class UserService {
   constructor(private http: HttpClient, private localService: LocalStorageService,private router: Router) { }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Something went wrong; please try again later.';
+    let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-        console.error('An error occurred:', error.error.message);
+      console.error('Le client a retourné:', error.error.message);
+      errorMessage = error.error.message;
     } else {
-        console.error(`Le backend a retourné le code ${error.status}, le corps était:`, error.error);
-        errorMessage = error.error.message || errorMessage;
-    }
+      console.error(`Le backend a retourné le code ${error.status}, le corps était:`, error.error);
+      errorMessage = error.error.message || error.statusText;
+    } console.log(errorMessage)
+
     return throwError(() => ({ status: error.status, message: errorMessage }));
   }
+
 
   getUserId(): string | null {
     const token = this.localService.getToken();
@@ -44,9 +47,7 @@ export class UserService {
     const userId = this.getUserId();
     return this.http.get<any>(`${this.userUrl}/getUser/${userId}`, {
       headers: new HttpHeaders({ 'Authorization': `Bearer ${this.localService.getToken()}` })
-    }).pipe(
-      catchError(this.handleError)
-    );
+    }).pipe(catchError(this.handleError));
   }
 
 
@@ -61,9 +62,7 @@ export class UserService {
   register(user: Register): Observable<any> {
     return this.http.post<any>(`${this.authUrl}/register`, user, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }).pipe(
-      catchError(this.handleError)
-    );
+    }).pipe(catchError(this.handleError));
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {

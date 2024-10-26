@@ -4,10 +4,10 @@ const cloudinaryController ={
 
     upload: async (req, res) => {
         try {
-            const fileStr = req.body.data; // Assure-toi d'envoyer les fichiers correctement
+            const fileStr = req.body.data; 
     
             const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-                upload_preset: 'ml_default', // Tu peux configurer un preset dans ton Cloudinary
+                upload_preset: 'ml_default', 
             });
     
             res.json({ url: uploadResponse.secure_url });
