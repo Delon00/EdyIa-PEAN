@@ -1,6 +1,7 @@
 main{
+  padding: 1rem 2rem;
   .user-role{
-    font-size: 12px;
+    font-size: 10px;
     color: #ffc224;
     background-color: #000;
     border-radius: 15px;
@@ -26,5 +27,13 @@ main{
   @keyframes fadeIn {0% {opacity: 0;}100% {opacity: 1;}}
   @keyframes borderChange {0% { border-bottom: 1px solid #000;}100% {border-bottom: 1px solid #ffc224;}}
 
+  .contain{
+    margin: 0.2rem 0 0.5rem 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid rgba(224, 224, 224, 0.5568627451);
+    padding: 1rem;
+    border-radius: 15px;
+    width: 100%;
+  }
 }
 

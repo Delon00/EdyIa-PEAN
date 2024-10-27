@@ -1,6 +1,6 @@
 <main *ngIf="userData; else loading">
   <div class="flex justify-between">
-    <div class="flex items-center ">
+    <div class="flex items-center gap-2">
       <img [src]="userData.user.url_profile" class="w-28 h-28" alt="">
       <div>
         <h4 class="my-1"><span *ngIf="!isModify">{{userData.user.nom}} </span><input  *ngIf="isModify" type="text" placeholder={{userData.user.nom}}></h4>
@@ -9,6 +9,10 @@
     </div>
     <div class="flex items-center"><button (click)="modify()" class="btn-link flex gap-1 items-center text-sm"><i class="pi pi-user-edit"></i>Modifier</button></div>
   </div>
+  <p class="font-semibold pt-5">Mes coordonnées</p>
+  <div class="contain"></div>
+  <p class="font-semibold">Mes études</p>
+  <div class="contain"></div>
 </main>
 <ng-template #loading>
   <app-loader/>
