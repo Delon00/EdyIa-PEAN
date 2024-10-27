@@ -5,11 +5,11 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '@app/core/services/user.service';
 import { BaseService } from '@app/core/services/base.service';
 import { NavbarComponent } from "@shared/navbar/navbar.component";
-
+import { LoaderComponent } from '@app/presentation/shared/loader/loader.component';
 @Component({
   selector: 'app-expliq',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavbarComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, LoaderComponent],
   templateUrl: './expliq.component.html',
   styleUrl: './expliq.component.scss',
 })

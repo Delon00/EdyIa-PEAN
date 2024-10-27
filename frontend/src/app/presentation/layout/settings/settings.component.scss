@@ -1,7 +1,7 @@
 main{
 
   section{
-    height: 89dvh;
+    height: 100dvh;
     display: flex;
 
     aside.responsive{
@@ -15,29 +15,37 @@ main{
       animation: slideIn 0.5s ease forwards;
     }
     aside{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items:flex-start;
       border-top: 1px solid #00000010;
       border-right: 1px solid #00000010;
-      width: 20%;
+      width: 22%;
       height: 100%;
       padding: 1rem;
       background: rgb(255,241,206);
       background: linear-gradient(135deg, rgba(255,241,206,1) 0%, rgba(242,255,241,1) 100%);
       animation: slideIn 0.5s ease forwards;
 
+      hr{border: 0.5px solid #00000035; border-radius: 15px;width: 100%;}
 
       h4{display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem;}
 
+      .btn-retour{display: flex; gap: 0.6rem; align-items: center; margin: 0.5rem 0;}
+      .btn-retour:hover{color: #ffc224;}
       a {
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: 1rem;
+        gap: 0.6rem;
         margin: 2rem 0;
         transition: all 0.3s ease;
       }
 
       a.current {
         padding-left: 0.5rem;
+        padding-right: 0.1rem;
         padding-top: 0.2rem;
         padding-bottom: 0.2rem;
         background-color: #ffc224;
@@ -61,7 +69,7 @@ main{
   display: none;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   left: 0;
   top: 100px;
   background-color: #ffc224;
@@ -71,7 +79,7 @@ main{
 }
 .aside-btn.open{left: 70px;}
 .aside-btn.open i{transform: rotate(180deg);transition: all 0.3s ease;}
-
+app-profile{width: 100%;}
 @media screen and (max-width: 868px) {
   main section aside{width: 10%;}
   main section aside span{display: none;}

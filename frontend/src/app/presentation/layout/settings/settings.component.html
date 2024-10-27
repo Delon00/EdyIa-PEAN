@@ -1,19 +1,22 @@
-<main *ngIf="userData; else loading">
-  <app-navbar></app-navbar>
+<main >
   <section >
     <aside [ngClass]="{'responsive': isAsideOpen}">
       <div>
         <h4><i class="pi pi-cog"></i><span>Mon profile</span></h4>
+        <hr class="my-3 ">
       </div>
-      <hr class="my-3">
-      <div class=" flex-col justify-start">
+      <div class=" flex-col justify-start py-2">
         <a class="" routerLink="/compte/profile" routerLinkActive="current" ><i class="pi pi-user"></i> <span>Profile</span></a>
         <a class="" routerLink="/compte/abonnement" routerLinkActive="current" ><i class="pi pi-credit-card"></i> <span>Abonnement</span></a>
         <a class="" routerLink="/compte/preference" routerLinkActive="current" ><i class="pi pi-sliders-h"></i> <span>Preference</span></a>
         <a class="" routerLink="/compte/securite-confidentialite" routerLinkActive="current" ><i class="pi pi-shield"></i> <span>Sécurité & confidentialité</span></a>
       </div>
+      <div class="py-2 w-full">
+        <hr class="my-3 ">
+        <a (click)="retour()" routerLink="/dashboard" class="btn-retour"><i class="pi pi-angle-left"></i>Retour</a>
+      </div>
     </aside>
-    <button (click)="asideToggle()" type="button" class="aside-btn" [ngClass]="{'open': isAsideOpen}">
+    <button (click)="asideToggle()"title="sidebar" type="button" class="aside-btn" [ngClass]="{'open': isAsideOpen}">
       <i class="pi pi-angle-right"></i>
     </button>
     <router-outlet></router-outlet>
@@ -21,6 +24,4 @@
   </section>
 
 </main>
-<ng-template #loading>
-  <app-loader/>
-</ng-template>
+

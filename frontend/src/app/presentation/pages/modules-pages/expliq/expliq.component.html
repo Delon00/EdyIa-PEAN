@@ -1,5 +1,5 @@
-<main>
-    <app-navbar/>
+<main *ngIf="user; else loading">
+  <app-navbar/>
     <div class="main-container">
 
       <div class="reponse-container">
@@ -36,3 +36,6 @@
     </div>
 
 </main>
+<ng-template #loading>
+  <app-loader/>
+</ng-template>
