@@ -14,19 +14,24 @@ EdyIa est une application web qui utilise l'intelligence artificielle pour amél
 
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/votre-utilisateur/edyia.git
+   git clone https://github.com/votre-utilisateur/EdyIa-PEAN.git
    ```
 2. Accédez au répertoire du projet :
    ```bash
-   cd edyia
+   cd EdyIa-PEAN
    ```
-3. Installez les dépendances pour le frontend :
+3. Installez les dépendances du projet :
+   ```bash
+   npm i
+   ```
+4. Installez les dépendances pour le frontend :
    ```bash
    cd frontend
    npm install
    ```
-4. Installez les dépendances pour le backend :
+5. Installez les dépendances pour le backend :
    ```bash
+   cd ..
    cd backend
    npm install
    ```
