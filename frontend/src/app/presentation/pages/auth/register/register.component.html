@@ -13,18 +13,18 @@
         <div class="flex flex-col w-full">
           <label for="nom">Nom</label>
           <input id="nom" type="text" pInputText formControlName="nom" />
-          <div *ngIf="formRegister.controls['nom'].touched && formRegister.controls['nom'].invalid || formRegister.controls['nom'].dirty">
+          <ng-container *ngIf="formRegister.controls['nom'].touched && formRegister.controls['nom'].invalid || formRegister.controls['nom'].dirty">
             <span *ngIf="formRegister.controls['nom'].errors?.['required']" class="message-error">Ce champ est requis</span>
             <span *ngIf="formRegister.controls['nom'].errors?.['minlength']" class="message-error">Minimum de 2 lettres</span>
-          </div>
+          </ng-container>
         </div>
         <div class="flex flex-col w-full my-2">
           <label for="prenom">Prénom</label>
           <input id="prenom" type="text" pInputText formControlName="prenom" />
-          <div *ngIf="formRegister.controls['prenom'].touched && formRegister.controls['prenom'].invalid || formRegister.controls['prenom'].dirty">
+          <ng-container *ngIf="formRegister.controls['prenom'].touched && formRegister.controls['prenom'].invalid || formRegister.controls['prenom'].dirty">
             <span *ngIf="formRegister.controls['prenom'].errors?.['required']" class="message-error">Ce champ est requis</span>
             <span *ngIf="formRegister.controls['prenom'].errors?.['minlength']" class="message-error">Minimum de 2 caractères</span>
-          </div>
+          </ng-container>
         </div>
       </div>
 

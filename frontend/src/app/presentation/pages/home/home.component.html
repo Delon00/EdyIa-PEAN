@@ -3,8 +3,8 @@
     <div class="overlay"></div>
     <div class="hero-content">
       <div class="nav-bar">
-        <button *ngIf="!LoginForm" (click)="showLoginForm()" class="btn-link">Se connecter</button>
-        <button *ngIf="LoginForm" (click)="hideLoginForm()" class="btn-link" title="Fermer"><i class="pi pi-times"></i></button>
+        <button *ngIf="!LoginForm" (click)="toggleLoginForm()" class="btn-link">Se connecter</button>
+        <button *ngIf="LoginForm" (click)="toggleLoginForm()" class="btn-link" title="Fermer"><i class="pi pi-times"></i></button>
         <div class="loginForm" *ngIf="LoginForm">
           <h2>Connexion</h2>
           <form [formGroup]="formLogin" (ngSubmit)="onLogin()">

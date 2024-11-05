@@ -7,8 +7,10 @@ main{
     border-radius: 15px;
     padding: 0.2rem 0.5rem;
   }
-  span {transition: ease-in-out 1s;}
-
+  span {
+    animation: move 3s infinite alternate ease-in-out;
+  }
+  @keyframes move {0% {left: 0;}100% {left: 100px;}}
 
   input {
     border: none;

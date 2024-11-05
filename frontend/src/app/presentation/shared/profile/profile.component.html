@@ -7,10 +7,19 @@
         <div class="flex items-center gap-1"><h5 class="my-1"><span *ngIf="!isModify">{{userData.user.prenom}}</span><input  *ngIf="isModify" type="text" placeholder={{userData.user.prenom}}></h5> <span class="user-role">{{userData.user.role}}</span></div>
       </div>
     </div>
-    <div class="flex items-center"><button (click)="modify()" class="btn-link flex gap-1 items-center text-sm"><i class="pi pi-user-edit"></i>Modifier</button></div>
+    <div class="flex items-center gap-1">
+      <button title="close" (click)="modify()" *ngIf="isModify" class="modify-close items-center text-sm"><span class="flex items-center gap-1"><i class="pi pi-times"></i></span></button>
+      <button (click)="modify()" class="btn-link flex gap-1 items-center text-sm">
+        <span *ngIf="!isModify" class="flex items-center gap-1"><i class="pi pi-user-edit"></i>Modifier</span>
+        <span *ngIf="isModify" class="flex items-center gap-1"><i class="pi pi-save"></i>Enregistrer</span>
+      </button>
+  </div>
   </div>
   <p class="font-semibold pt-5">Mes coordonnées</p>
-  <div class="contain"></div>
+  <div class="contain">
+    <div class="flex gap-1 items-center py-1 font-bold"><i class="text-[#ffc244] pi pi-envelope"></i> :<span>{{userData.user.email}}</span></div>
+    <div class="flex gap-1 items-center py-1 font-bold"><i class="text-[#ffc244] pi pi-phone"></i> :<span>{{userData.user.telephone}}</span></div>
+  </div>
   <p class="font-semibold">Mes études</p>
   <div class="contain"></div>
 </main>

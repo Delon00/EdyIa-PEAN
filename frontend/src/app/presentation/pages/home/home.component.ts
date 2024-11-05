@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Login } from '@interfaces/login';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { BaseService } from '@services/base.service';
@@ -20,43 +20,35 @@ export class HomeComponent implements OnInit {
   errorMessage: string = '';
   emailError: string = '';
   passwordError: string = '';
-  formLogin: FormGroup;
-  userlogin: Login = {
-    email: '',
-    password: '',
-  };
+  formLogin!: FormGroup;
+
   isLoading: boolean = false;
 
-  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private localStorage:LocalStorageService) {
-    this.formLogin = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+  constructor(private router: Router, private userService: UserService, private localStorage:LocalStorageService) {
+
+  }
+
+  ngOnInit(): void {
+    this.formLogin = new FormGroup({
+      email: new FormControl ('', [Validators.required, Validators.email]),
+      password: new FormControl ('', [Validators.required,]),
     });
   }
+  toggleLoginForm() {this.LoginForm = !this.LoginForm}
 
-  ngOnInit(): void {}
-
-  showLoginForm() {
-    this.LoginForm = true;
-  }
-
-  hideLoginForm() {
-    this.LoginForm = false;
-  }
 
   onLogin() {
     if (this.formLogin.valid) {
       this.isLoading = true;
-      this.userlogin = this.formLogin.value;
-      this.userService.login(this.userlogin).subscribe(
-        (response: any) => {
+      this.userService.login(this.formLogin.value).subscribe({
+        next:(response: any) => {
           this.userService.saveUserData(response.user);
           this.localStorage.createToken(response.token)
           console.log(this.localStorage.getToken())
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         },
-        (error: any) => {
+        error:(error: any) => {
           if (error.status === 400) {
             this.errorMessage = error.message;
           } else if (error.status === 401) {
@@ -69,11 +61,8 @@ export class HomeComponent implements OnInit {
           }
           this.isLoading = false;
         }
-      );
-    } else {
-      this.errorMessage = "Veuillez remplir correctement le formulaire.";
-      this.emailError = this.formLogin.get('email')?.errors?.['required'] ? 'Email requis' : '';
-      this.passwordError = this.formLogin.get('password')?.errors?.['required'] ? 'Mot de passe requis' : '';
+      });
     }
+    else {this.errorMessage = "Veuillez remplir correctement le formulaire.";}
   }
 }

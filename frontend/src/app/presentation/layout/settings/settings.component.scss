@@ -23,7 +23,8 @@ main{
       align-items:flex-start;
       border-top: 1px solid #00000010;
       border-right: 1px solid #00000010;
-      width: 22%;
+      min-width: 23%;
+      max-width: 23%;
       height: 100%;
       padding: 1rem;
       background: rgb(255,241,206);
@@ -31,7 +32,6 @@ main{
       animation: slideIn 0.5s ease forwards;
 
       hr{border: 0.5px solid #00000035; border-radius: 15px;width: 100%;}
-
       h4{display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem;}
 
       .btn-retour{display: flex; gap: 0.6rem; align-items: center; margin: 0.5rem 0;}

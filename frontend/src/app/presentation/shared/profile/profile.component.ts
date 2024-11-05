@@ -14,7 +14,7 @@ import { LoaderComponent } from '@app/presentation/shared/loader/loader.componen
 export class ProfileComponent implements OnInit {
   userData: any;
   isModify:boolean = false;
-
+  
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {

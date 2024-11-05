@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { FormGroup, ReactiveFormsModule, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, Validators, FormControl, } from '@angular/forms';
 import { Register } from '@interfaces/register';
 import { Router, RouterModule, RouterLink } from '@angular/router';
 import { UserService } from '@services/user.service';
@@ -56,13 +56,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  showRegisterForm() {
-    this.isRegisterFormVisible = true;
-  }
 
-  hideRegisterForm() {
-    this.isRegisterFormVisible = false;
-  }
 
   onRegister() {
     if (this.formRegister.valid) {

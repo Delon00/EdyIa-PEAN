@@ -72,4 +72,13 @@ h7 {font-size: 0.75em;font-weight: bold;margin: 8px 0;}
     border: none;
     cursor: pointer;
 }
+.modify-close{
+  border-radius: 100%;
+  background-color: #ffc244;
+  padding: 0.45rem;
+  color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  animation: btn-link 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
 app-profile,app-abonnement{width: 100%;}
