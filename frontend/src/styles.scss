@@ -81,4 +81,29 @@ h7 {font-size: 0.75em;font-weight: bold;margin: 8px 0;}
   animation: btn-link 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+.modify-close:hover{
+  transition: all 0.3s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.modal-container{
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000069;
+  height: 100dvh;
+  width: 100dvw;
+}
+.modal{
+  padding: 0.5rem;
+  width: 90%;
+  height: 90%;
+  border-radius: 17px;
+  background-color: #fff;
+  animation: _ngcontent-ng-c2884099346_fadeIn 0.5s ease-in-out;
+  overflow-y: scroll;
+}
+
 app-profile,app-abonnement{width: 100%;}

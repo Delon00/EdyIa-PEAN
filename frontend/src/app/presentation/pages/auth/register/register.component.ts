@@ -16,6 +16,7 @@ import { IpService } from '@app/utils/ipAdresseFind';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
+
 export class RegisterComponent implements OnInit {
   isRegisterFormVisible = false;
   ipAddress: string = '';

@@ -3,18 +3,19 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '@services/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from '@app/presentation/shared/loader/loader.component';
-
+import { FileUploadModule } from 'primeng/fileupload';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,LoaderComponent],
+  imports: [ReactiveFormsModule, CommonModule,LoaderComponent, FileUploadModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
   userData: any;
   isModify:boolean = false;
-  
+  modalOpen : boolean = false;
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
@@ -33,8 +34,15 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  modify() {
+  toogleModify() {
     this.isModify = !this.isModify
   }
+  save(){}
+  toogleModal(){
+    this.modalOpen = !this.modalOpen
+  }
+    onBasicUploadAuto() {
+  }
+
 
 }
